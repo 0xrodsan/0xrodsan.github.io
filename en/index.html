@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0xRodsan — Linux & Networking Specialist</title>
+    <meta name="description" content="Personal site of 0xRodsan — Linux & Networking Specialist at Red Hat. Bitcoin, privacy, open-source and cypherpunk enthusiast.">
+
+    <link rel="alternate" hreflang="pt-BR" href="https://0xrodsan.github.io/">
+    <link rel="alternate" hreflang="en" href="https://0xrodsan.github.io/en/">
+    <link rel="alternate" hreflang="x-default" href="https://0xrodsan.github.io/">
+    <link rel="canonical" href="https://0xrodsan.github.io/en/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../style.css">
+
+    <script>
+        (function() {
+            var stored = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = stored || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/en/" class="site-logo">0xRodsan</a>
+
+            <nav class="site-nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="/" class="lang-switch" aria-label="Mudar para Português" title="Português">PT</a>
+
+                <button type="button" class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                    </svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <button type="button" class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+
+        <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden>
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item"><a href="#contact" class="mobile-nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section class="hero reveal" aria-labelledby="hero-title">
+            <h1 id="hero-title" class="hero-title">0xRodsan</h1>
+            <p class="hero-subtitle">
+                Linux & Networking Specialist at Red Hat, working as a Software Support Engineer on the Networking team.
+                Passionate about Bitcoin, cryptocurrency, privacy, open-source, macroeconomics and the cypherpunk ethos.
+            </p>
+        </section>
+
+        <section class="quote-section reveal" aria-label="Quote">
+            <blockquote class="quote">
+                <p>He who knows not, and knows not that he knows not — He is a fool, shun him.</p>
+                <p>He who knows not, and knows that he knows not — He is simple, teach him.</p>
+                <p>He who knows, and knows not that he knows — He is asleep, wake him.</p>
+                <p>He who knows, and knows that he knows — He is insufferable, use him.</p>
+                <p>He who knows, and knows when he knows not — He is wise, follow him.</p>
+                <footer class="quote-cite">— Victor F. B. de Mello, adapted from an anonymous Arab proverb</footer>
+            </blockquote>
+        </section>
+
+        <section class="cta-section reveal" aria-labelledby="cta-title">
+            <div class="cta-card">
+                <h2 id="cta-title" class="cta-title">Get in touch</h2>
+                <p class="cta-text">
+                    Have a project in mind, want to collaborate, or just exchange an idea?
+                    I'd be glad to hear from you.
+                </p>
+                <a href="#contact" class="cta-button">Reach out</a>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section reveal" aria-labelledby="contact-title">
+            <h2 id="contact-title" class="section-title">Contact</h2>
+            <p class="contact-description">
+                Want to talk about a project, collaborate, or just exchange an idea? Find me here.
+            </p>
+            <ul class="contact-list">
+                <li class="contact-item">
+                    <span class="contact-label">Email</span>
+                    <a href="mailto:rodrigosantos@gmail.com" class="contact-value">rodrigosantos@gmail.com</a>
+                </li>
+                <li class="contact-item">
+                    <span class="contact-label">Instagram</span>
+                    <a href="https://instagram.com/rodrigovaz80" class="contact-value" target="_blank" rel="noopener noreferrer">@rodrigovaz80</a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p class="footer-copy">© <span class="footer-year">2025</span> 0xRodsan</p>
+            <ul class="footer-social">
+                <li>
+                    <a href="https://www.linkedin.com/in/rodsan80/" class="footer-social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
