@@ -1,6 +1,6 @@
 # 0xrodsan.github.io
 
-Personal bilingual (PT-BR / EN) website of **0xRodsan**, hosted on GitHub Pages at <https://0xrodsan.github.io>.
+Personal bilingual (PT-BR / EN) website of **RodSan**, hosted on GitHub Pages at <https://0xrodsan.github.io>.
 
 Built with vanilla HTML5, modern CSS (custom properties), and plain JavaScript — no frameworks, no build step.
 
