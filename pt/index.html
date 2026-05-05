@@ -1,133 +1,257 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RodSan — Linux & Networking Specialist</title>
-    <meta name="description" content="Site pessoal de RodSan — Especialista em Linux e Redes na Red Hat, entusiasta de Bitcoin, privacidade e open-source.">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>RodSan — Linux & Networking Specialist</title>
+        <meta
+            name="description"
+            content="Site pessoal de RodSan — Especialista em Linux e Redes na Red Hat, entusiasta de Bitcoin, privacidade e open-source."
+        />
 
-    <link rel="alternate" hreflang="en" href="https://0xrodsan.github.io/">
-    <link rel="alternate" hreflang="pt-BR" href="https://0xrodsan.github.io/pt/">
-    <link rel="alternate" hreflang="x-default" href="https://0xrodsan.github.io/">
-    <link rel="canonical" href="https://0xrodsan.github.io/pt/">
+        <link
+            rel="alternate"
+            hreflang="en"
+            href="https://0xrodsan.github.io/"
+        />
+        <link
+            rel="alternate"
+            hreflang="pt-BR"
+            href="https://0xrodsan.github.io/pt/"
+        />
+        <link
+            rel="alternate"
+            hreflang="x-default"
+            href="https://0xrodsan.github.io/"
+        />
+        <link rel="canonical" href="https://0xrodsan.github.io/pt/" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
 
-    <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="../style.css" />
 
-    <script>
-        (function() {
-            var stored = localStorage.getItem('theme');
-            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            var theme = stored || (prefersDark ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', theme);
-        })();
-    </script>
-</head>
-<body>
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="/pt/" class="site-logo">RodSan</a>
+        <script>
+            (function () {
+                var stored = localStorage.getItem("theme");
+                var prefersDark = window.matchMedia(
+                    "(prefers-color-scheme: dark)",
+                ).matches;
+                var theme = stored || (prefersDark ? "dark" : "light");
+                document.documentElement.setAttribute("data-theme", theme);
+            })();
+        </script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/pt/" class="site-logo">RodSan</a>
 
-            <nav class="site-nav" aria-label="Navegação principal">
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="contato.html" class="nav-link">Contato</a></li>
-                    <!-- Add new nav items here: <li class="nav-item"><a class="nav-link" href="…">…</a></li> -->
-                </ul>
-            </nav>
+                <nav class="site-nav" aria-label="Navegação principal">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="contato.html" class="nav-link">Contato</a>
+                        </li>
+                        <!-- Add new nav items here: <li class="nav-item"><a class="nav-link" href="…">…</a></li> -->
+                    </ul>
+                </nav>
 
-            <div class="header-actions">
-                <button type="button" class="theme-toggle" aria-label="Alternar tema claro/escuro" title="Alternar tema">
-                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <circle cx="12" cy="12" r="4"></circle>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
-                    </svg>
-                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                </button>
+                <div class="header-actions">
+                    <button
+                        type="button"
+                        class="theme-toggle"
+                        aria-label="Alternar tema claro/escuro"
+                        title="Alternar tema"
+                    >
+                        <svg
+                            class="icon-sun"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path
+                                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+                            ></path>
+                        </svg>
+                        <svg
+                            class="icon-moon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                            ></path>
+                        </svg>
+                    </button>
 
-                <a href="../" class="lang-flag" aria-label="English" title="English">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" width="24" height="16" aria-hidden="true">
-                        <rect width="30" height="20" fill="#b22234"/>
-                        <g fill="#fff">
-                            <rect y="1.54" width="30" height="1.54"/>
-                            <rect y="4.62" width="30" height="1.54"/>
-                            <rect y="7.69" width="30" height="1.54"/>
-                            <rect y="10.77" width="30" height="1.54"/>
-                            <rect y="13.85" width="30" height="1.54"/>
-                            <rect y="16.92" width="30" height="1.54"/>
-                        </g>
-                        <rect width="12" height="10.77" fill="#3c3b6e"/>
-                    </svg>
-                </a>
-
-                <button type="button" class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-
-        <nav id="mobile-nav" class="mobile-nav" aria-label="Navegação móvel" hidden>
-            <ul class="mobile-nav-list">
-                <li class="mobile-nav-item"><a href="contato.html" class="mobile-nav-link">Contato</a></li>
-                <!-- Add new nav items here: <li class="mobile-nav-item"><a class="mobile-nav-link" href="…">…</a></li> -->
-            </ul>
-        </nav>
-    </header>
-
-    <main class="main-content">
-        <section class="hero reveal" aria-labelledby="hero-title">
-            <h1 id="hero-title" class="hero-title">RodSan</h1>
-            <p class="hero-subtitle">
-                Vivendo entre dois mundos. Engenheiro de software por profissão, pai que cruza fronteiras, curioso sobre soberania monetária, código aberto e sistemas sem permissão.
-            </p>
-        </section>
-
-        <section class="quote-section reveal" aria-label="Citação">
-            <blockquote class="quote">
-                <p>Aquele que não sabe, e não sabe que não sabe — É um tolo, evite-o.</p>
-                <p>Aquele que não sabe, e sabe que não sabe — É simples, ensine-o.</p>
-                <p>Aquele que sabe, e não sabe que sabe — Está adormecido, desperte-o.</p>
-                <p>Aquele que sabe, e sabe que sabe — É insuportável, use-o.</p>
-                <p>Aquele que sabe, e sabe quando não sabe — É sábio, siga-o.</p>
-                <footer class="quote-cite">— Victor F. B. de Mello, adaptado de um provérbio árabe anônimo</footer>
-            </blockquote>
-        </section>
-
-        <section class="cta-section reveal" aria-labelledby="cta-title">
-            <div class="cta-card">
-                <h2 id="cta-title" class="cta-title">Vamos conversar</h2>
-                <p class="cta-text">
-                    Tem um projeto em mente, quer colaborar em algo ou apenas trocar uma ideia?
-                    Ficarei feliz em ouvir de você.
-                </p>
-                <a href="contato.html" class="cta-button">Entre em contato</a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <p class="footer-copy">© <span class="footer-year">2025</span> RodSan</p>
-            <ul class="footer-social">
-                <li>
-                    <a href="https://www.linkedin.com/in/rodsan80/" class="footer-social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                            <rect x="2" y="9" width="4" height="12"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
+                    <a
+                        href="../"
+                        class="lang-flag"
+                        aria-label="English"
+                        title="English"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 30 20"
+                            width="24"
+                            height="16"
+                            aria-hidden="true"
+                        >
+                            <rect width="30" height="20" fill="#b22234" />
+                            <g fill="#fff">
+                                <rect y="1.54" width="30" height="1.54" />
+                                <rect y="4.62" width="30" height="1.54" />
+                                <rect y="7.69" width="30" height="1.54" />
+                                <rect y="10.77" width="30" height="1.54" />
+                                <rect y="13.85" width="30" height="1.54" />
+                                <rect y="16.92" width="30" height="1.54" />
+                            </g>
+                            <rect width="12" height="10.77" fill="#3c3b6e" />
                         </svg>
                     </a>
-                </li>
-            </ul>
-        </div>
-    </footer>
 
-    <script src="../script.js"></script>
-</body>
+                    <button
+                        type="button"
+                        class="menu-toggle"
+                        aria-label="Abrir menu"
+                        aria-expanded="false"
+                        aria-controls="mobile-nav"
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+
+            <nav
+                id="mobile-nav"
+                class="mobile-nav"
+                aria-label="Navegação móvel"
+                hidden
+            >
+                <ul class="mobile-nav-list">
+                    <li class="mobile-nav-item">
+                        <a href="contato.html" class="mobile-nav-link"
+                            >Contato</a
+                        >
+                    </li>
+                    <!-- Add new nav items here: <li class="mobile-nav-item"><a class="mobile-nav-link" href="…">…</a></li> -->
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <section class="hero reveal" aria-labelledby="hero-title">
+                <h1 id="hero-title" class="hero-title">RodSan</h1>
+                <p class="hero-subtitle">
+                    Vivendo entre dois mundos. Engenheiro de suporte de software
+                    por profissão, pai que cruza fronteiras, curioso sobre
+                    soberania monetária, código aberto e sistemas sem permissão.
+                </p>
+            </section>
+
+            <section class="quote-section reveal" aria-label="Citação">
+                <blockquote class="quote">
+                    <p>
+                        Aquele que não sabe, e não sabe que não sabe — É um
+                        tolo, evite-o.
+                    </p>
+                    <p>
+                        Aquele que não sabe, e sabe que não sabe — É simples,
+                        ensine-o.
+                    </p>
+                    <p>
+                        Aquele que sabe, e não sabe que sabe — Está adormecido,
+                        desperte-o.
+                    </p>
+                    <p>
+                        Aquele que sabe, e sabe que sabe — É insuportável,
+                        use-o.
+                    </p>
+                    <p>
+                        Aquele que sabe, e sabe quando não sabe — É sábio,
+                        siga-o.
+                    </p>
+                    <footer class="quote-cite">
+                        — Victor F. B. de Mello, adaptado de um provérbio árabe
+                        anônimo
+                    </footer>
+                </blockquote>
+            </section>
+
+            <section class="cta-section reveal" aria-labelledby="cta-title">
+                <div class="cta-card">
+                    <h2 id="cta-title" class="cta-title">Vamos conversar</h2>
+                    <p class="cta-text">
+                        Tem um projeto em mente, quer colaborar em algo ou
+                        apenas trocar uma ideia? Ficarei feliz em ouvir de você.
+                    </p>
+                    <a href="contato.html" class="cta-button"
+                        >Entre em contato</a
+                    >
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <p class="footer-copy">
+                    © <span class="footer-year">2025</span> RodSan
+                </p>
+                <ul class="footer-social">
+                    <li>
+                        <a
+                            href="https://www.linkedin.com/in/rodsan80/"
+                            class="footer-social-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="LinkedIn"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"
+                                ></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+
+        <script src="../script.js"></script>
+    </body>
 </html>
