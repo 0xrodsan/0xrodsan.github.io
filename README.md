@@ -8,17 +8,20 @@ Built with vanilla HTML5, modern CSS (custom properties), and plain JavaScript �
 
 ```
 .
-├── index.html        # Brazilian Portuguese version (root)
-├── en/
-│   └── index.html    # English version
-├── style.css         # Shared styles (light + dark themes)
-├── script.js         # Theme toggle, mobile menu, reveal animations
+├── index.html         # English (default, root)
+├── contato.html       # English contact page
+├── pt/
+│   ├── index.html     # Brazilian Portuguese
+│   └── contato.html   # Brazilian Portuguese contact page
+├── style.css          # Shared styles (light + dark themes)
+├── script.js          # Theme toggle, mobile menu, reveal animations
 └── README.md
 ```
 
 ## Features
 
-- **Bilingual routing**: `/` serves Portuguese, `/en/` serves English. Proper `hreflang` and canonical tags on each page.
+- **Bilingual routing**: `/` serves English (default), `/pt/` serves Brazilian Portuguese. Proper `hreflang` and canonical tags on each page.
+- **Flag-based language switcher**: USA and Brazil flag icons in the header; the active flag is highlighted, the other links to the equivalent page in the other language.
 - **Dark / light theme**: Defaults to the user's `prefers-color-scheme`, can be overridden via the toggle, and the choice is persisted in `localStorage`. A small inline script in `<head>` applies the theme before paint to avoid a flash of the wrong theme.
 - **Mobile-first responsive layout** with a hamburger menu on small screens and a horizontal nav on tablet and up.
 - **Fade-in animations** on sections via `IntersectionObserver`, with `prefers-reduced-motion` respected.
@@ -40,10 +43,10 @@ Push to the `main` branch of the `0xrodsan.github.io` repository. GitHub Pages w
 
 ## Editing content
 
-- **Portuguese copy** lives in `index.html`.
-- **English copy** lives in `en/index.html`.
-- Both files share `style.css` and `script.js` via relative links.
-- To add new nav items (e.g. Articles, Reports), append `<li class="nav-item">` entries to `.nav-list` and `.mobile-nav-list` in both HTML files.
+- **English copy** lives in `index.html` and `contato.html` (root).
+- **Portuguese copy** lives in `pt/index.html` and `pt/contato.html`.
+- All pages share `style.css` and `script.js` via relative links (`./` from root, `../` from `pt/`).
+- To add new nav items (e.g. Articles, Reports), append `<li class="nav-item">` entries to `.nav-list` and `.mobile-nav-list` in every HTML file (markup is intentionally identical across pages so they stay in sync).
 
 ## License
 

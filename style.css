@@ -181,19 +181,41 @@ svg {
 }
 
 .lang-switch {
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: var(--color-text-muted);
-    padding: 0.4rem 0.6rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    transition: color var(--transition-fast), border-color var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
 }
 
-.lang-switch:hover {
-    color: var(--color-text);
-    border-color: var(--color-text-muted);
+.lang-flag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: var(--radius-sm);
+    opacity: 0.5;
+    transition: opacity var(--transition-fast), background-color var(--transition-fast);
+}
+
+.lang-flag:hover {
+    opacity: 1;
+    background-color: var(--color-surface);
+}
+
+.lang-flag.is-active {
+    opacity: 1;
+    cursor: default;
+}
+
+.lang-flag.is-active:hover {
+    background-color: transparent;
+}
+
+.lang-flag svg {
+    display: block;
+    width: 24px;
+    height: 16px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-border) 70%, transparent);
 }
 
 .theme-toggle {
