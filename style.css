@@ -180,34 +180,17 @@ svg {
     gap: 0.5rem;
 }
 
-.lang-switch {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-}
-
 .lang-flag {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0.25rem;
     border-radius: var(--radius-sm);
-    opacity: 0.5;
-    transition: opacity var(--transition-fast), background-color var(--transition-fast);
+    transition: background-color var(--transition-fast);
 }
 
 .lang-flag:hover {
-    opacity: 1;
     background-color: var(--color-surface);
-}
-
-.lang-flag.is-active {
-    opacity: 1;
-    cursor: default;
-}
-
-.lang-flag.is-active:hover {
-    background-color: transparent;
 }
 
 .lang-flag svg {
