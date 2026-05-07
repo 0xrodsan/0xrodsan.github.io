@@ -1,6 +1,6 @@
-# rodsan.github.io
+# 0xrodsan.github.io
 
-Personal bilingual (PT-BR / EN) website of **RodSan**, hosted on GitHub Pages at <https://rodsan.github.io>.
+Personal bilingual (PT-BR / EN) website of **RodSan**, hosted on GitHub Pages at <https://0xrodsan.github.io>.
 
 Built with vanilla HTML5, modern CSS (custom properties), and plain JavaScript — no frameworks, no build step.
 
@@ -39,7 +39,7 @@ python3 -m http.server 8000
 
 ## Deployment
 
-Push to the `main` branch of the `rodsan.github.io` repository. GitHub Pages will serve the static files directly from the root.
+Push to the `main` branch of the `0xrodsan.github.io` repository. GitHub Pages will serve the static files directly from the root.
 
 ## Editing content
 

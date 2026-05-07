@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Rod\\\\Documents\\\\Stuff\\\\site_rodsan\" -Recurse -File)",
-      "Bash(Select-Object -ExpandProperty FullName)",
-      "Bash(Sort-Object)"
-    ]
-  }
-}
