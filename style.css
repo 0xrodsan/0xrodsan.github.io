@@ -465,11 +465,13 @@ svg {
     align-items: center;
     color: var(--color-text);
     padding: 0.5rem;
-    transition: color var(--transition-fast);
+    transition: color var(--transition-fast), opacity var(--transition-fast), transform var(--transition-fast);
 }
 
 .contact-info-link:hover {
     color: var(--color-text-muted);
+    opacity: 0.75;
+    transform: translateY(-2px);
 }
 
 .contact-info-link svg {
