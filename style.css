@@ -511,19 +511,25 @@ svg {
 }
 
 .footer-social-link {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
     color: var(--color-text-muted);
-    border-radius: var(--radius-sm);
-    transition: color var(--transition-fast), background-color var(--transition-fast);
+    padding: 0.4rem;
+    transition: color var(--transition-fast), opacity var(--transition-fast), transform var(--transition-fast);
 }
 
 .footer-social-link:hover {
     color: var(--color-text);
-    background-color: var(--color-surface);
+    opacity: 0.75;
+    transform: translateY(-2px);
+}
+
+.footer-social-link svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    pointer-events: none;
 }
 
 /* ============================================================
