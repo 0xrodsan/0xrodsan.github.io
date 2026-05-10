@@ -1,14 +1,6 @@
 (function () {
     "use strict";
 
-    /* Populate hrefs from SITE config ---------------------------- */
-    if (typeof SITE !== "undefined") {
-        document.querySelectorAll("[data-link]").forEach(function (el) {
-            const key = el.getAttribute("data-link");
-            if (SITE[key]) el.setAttribute("href", SITE[key]);
-        });
-    }
-
     /* Theme toggle ------------------------------------------------ */
     const themeToggle = document.querySelector(".theme-toggle");
     const root = document.documentElement;
