@@ -1,53 +1,25 @@
 # 0xrodsan.github.io
 
-Personal bilingual (PT-BR / EN) website of **RodSan**, hosted on GitHub Pages at <https://0xrodsan.github.io>.
+Personal site of RodSan — minimalist, bilingual (EN + PT-BR), built with 
+semantic HTML, CSS, and vanilla JavaScript. Hosted on GitHub Pages.
 
-Built with vanilla HTML5, modern CSS (custom properties), and plain JavaScript — no frameworks, no build step.
+## Live
+https://0xrodsan.github.io/
 
 ## Structure
+- `index.html` — EN home page
+- `pt/index.html` — PT-BR home page
+- `contato.html` — EN contact page
+- `pt/contato.html` — PT-BR contact page
+- `404.html` — custom error page
+- `style.css` — shared stylesheet
+- `config.js` — centralized external URLs (update here for domain migration)
+- `script.js` — minimal vanilla JS
 
-```
-.
-├── index.html         # English (default, root)
-├── contato.html       # English contact page
-├── pt/
-│   ├── index.html     # Brazilian Portuguese
-│   └── contato.html   # Brazilian Portuguese contact page
-├── style.css          # Shared styles (light + dark themes)
-├── script.js          # Theme toggle, mobile menu, reveal animations
-└── README.md
-```
+## Stack
+- HTML5, CSS3, vanilla JavaScript
+- No frameworks, no build step
+- GitHub Pages
 
-## Features
-
-- **Bilingual routing**: `/` serves English (default), `/pt/` serves Brazilian Portuguese. Proper `hreflang` and canonical tags on each page.
-- **Flag-based language switcher**: USA and Brazil flag icons in the header; the active flag is highlighted, the other links to the equivalent page in the other language.
-- **Dark / light theme**: Defaults to the user's `prefers-color-scheme`, can be overridden via the toggle, and the choice is persisted in `localStorage`. A small inline script in `<head>` applies the theme before paint to avoid a flash of the wrong theme.
-- **Mobile-first responsive layout** with a hamburger menu on small screens and a horizontal nav on tablet and up.
-- **Fade-in animations** on sections via `IntersectionObserver`, with `prefers-reduced-motion` respected.
-- **Minimalist design**: serif headings (Fraunces), sans-serif body (Inter), generous whitespace, subtle borders.
-- **Accessible**: semantic landmarks, ARIA labels, keyboard-friendly controls.
-
-## Local development
-
-No build step. Just open `index.html` in a browser, or serve the folder:
-
-```bash
-python3 -m http.server 8000
-# then visit http://localhost:8000
-```
-
-## Deployment
-
-Push to the `main` branch of the `0xrodsan.github.io` repository. GitHub Pages will serve the static files directly from the root.
-
-## Editing content
-
-- **English copy** lives in `index.html` and `contato.html` (root).
-- **Portuguese copy** lives in `pt/index.html` and `pt/contato.html`.
-- All pages share `style.css` and `script.js` via relative links (`./` from root, `../` from `pt/`).
-- To add new nav items (e.g. Articles, Reports), append `<li class="nav-item">` entries to `.nav-list` and `.mobile-nav-list` in every HTML file (markup is intentionally identical across pages so they stay in sync).
-
-## License
-
-Personal site — content © Rodrigo Santos. Code is free to reuse for your own personal site.
+## Part of
+[RodSan ecosystem](https://0xrodsan.github.io/) — each section lives in its own repo.
