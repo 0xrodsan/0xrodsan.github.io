@@ -1,5 +1,6 @@
 # Claude Code local settings (per-machine permissions)
 .claude/
+!.claude/settings.json
 
 # OS metadata
 .DS_Store
