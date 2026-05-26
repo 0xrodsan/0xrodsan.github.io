@@ -1,5 +1,5 @@
-# Claude Code local settings (per-machine permissions)
-.claude/
+# Claude Code local settings — ignore session files, track project settings
+.claude/*
 !.claude/settings.json
 
 # OS metadata
