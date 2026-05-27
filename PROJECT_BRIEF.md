@@ -56,8 +56,8 @@ Each site "section" is a separate repository published via GitHub Pages. Cross-l
 | Main site | `0xrodsan.github.io` | `0xrodsan.github.io/` | `rodsan.dev/` | ✅ Live |
 | Blackbox | `blackbox` | `0xrodsan.github.io/blackbox/` | `blackbox.rodsan.dev/` | ✅ Live |
 | Panorama Dollar | `panorama-dollar` | `0xrodsan.github.io/panorama-dollar/` | `panorama-dollar.rodsan.dev/` | ✅ Live |
-| BTC Cycle | `btc-cycle` | `0xrodsan.github.io/btc-cycle/` | `btc-cycle.rodsan.dev/` | 🚧 In development |
-| [future sections] | `0xrodsan-[name]` | `0xrodsan.github.io/[name]/` | `[name].rodsan.dev/` | 🔲 TBD |
+| BTC Cycle | `btc-cycle` | `0xrodsan.github.io/btc-cycle/` | `btc-cycle.rodsan.dev/` | ✅ Live |
+| [future sections] | `[name]` | `0xrodsan.github.io/[name]/` | `[name].rodsan.dev/` | 🔲 TBD |
 
 ---
 
@@ -65,7 +65,7 @@ Each site "section" is a separate repository published via GitHub Pages. Cross-l
 
 ### Current
 ```
-[RodSan]              [Blackbox]            [Contact]    [PT/]
+[RodSan]              [Blackbox]            [Contact]    [🇧🇷]
 ```
 
 ### Tab labels (bilingual)
@@ -74,6 +74,86 @@ Each site "section" is a separate repository published via GitHub Pages. Cross-l
 | Main | RodSan | RodSan |
 | First section | Blackbox | Caixa Preta |
 | Contact | Contact | Contato |
+
+---
+
+## Development Standards
+
+### Git author email
+All local commits must use the GitHub noreply email so contributions appear on the profile graph:
+```
+42328107+0xrodsan@users.noreply.github.com
+```
+Configure once globally:
+```powershell
+git config --global user.email "42328107+0xrodsan@users.noreply.github.com"
+```
+Never use a personal email for commits — the GitHub account email is set to Private, so commits from a personal email do not appear on the contribution graph.
+
+### Claude Code settings — every repo
+Every repo must contain `.claude/settings.json` at the root:
+```json
+{
+  "includeCoAuthoredBy": false
+}
+```
+Create this file as the **first commit** in every new repo, before any feature work. This prevents Claude Code from appending `Co-Authored-By: Claude Sonnet` to commit messages.
+
+The `.gitignore` must **not** block this file. Use this pattern:
+```
+.claude/*
+!.claude/settings.json
+```
+Never use `.claude/` alone in `.gitignore` — it silently blocks `settings.json` even with negation rules.
+
+---
+
+## Layout Standard for All Subsections and Tools
+
+> This is the canonical reference for nav, language switcher, and footer in every repo
+> beyond the main site. Follow exactly — no exceptions without a logged decision.
+
+### Header / Nav
+
+```html
+<!-- Brand link — always leftmost, always points to main site -->
+<a href="https://0xrodsan.github.io/" class="brand">RodSan</a>
+
+<!-- Nav list — Blackbox + Contact only. No RodSan in the list. -->
+<nav>
+  <ul>
+    <li><a href="https://0xrodsan.github.io/blackbox/">Blackbox</a></li>
+    <li><a href="https://0xrodsan.github.io/contato.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Language switcher — flag emoji, not text -->
+<a href="/[repo]/pt/" class="lang-flag" title="Português">🇧🇷</a>
+```
+
+Rules:
+- Brand `RodSan` appears **once** — as the logo link, never inside the nav list
+- Nav list items: **Blackbox** and **Contact** only
+- Active state applied to the current section if it matches a nav item
+- Language switcher: **flag emoji** (🇧🇷 for PT-BR), never plain text like "PT"
+- EN is always the primary language at `/`; PT-BR lives under `/pt/`
+- **Every repo that displays the 🇧🇷 flag must have a `/pt/index.html`** — even if it is a placeholder. A flag linking to a 404 is never acceptable. If the PT version is not ready, ship a placeholder with "Em breve" before publishing the EN page. Exception only if explicitly logged as a decision.
+
+### Footer
+
+```html
+<footer>
+  <p>© 2025 RodSan</p>
+  <ul class="social">
+    <li><a href="https://x.com/0xRodSan" target="_blank" rel="noopener">𝕏</a></li>
+  </ul>
+</footer>
+```
+
+Rules:
+- **X only** — LinkedIn is not included in subsections or tools
+- Main site (`0xrodsan.github.io`) may keep both LinkedIn and X; all other repos: X only
+- Copyright year: update manually when needed; no JS date generation
 
 ---
 
@@ -169,7 +249,7 @@ Tools that depend on external API data follow this pattern to respect free-tier 
 - Footer: same as main site
 
 ### Per-app standard
-- Own repository (`[app-name]` — no `0xrodsan-` prefix, matches future subdomain)
+- Own repository (`[app-name]` — matches future subdomain)
 - Layout consistent with main site
 - Functional without login/auth (MVP)
 
@@ -177,7 +257,7 @@ Tools that depend on external API data follow this pattern to respect free-tier 
 | App | Section | Status |
 |---|---|---|
 | Panorama Dollar | Market Analysis | ✅ Live |
-| BTC Cycle | Bitcoin / On-chain | 🚧 In development (Iteration 1) |
+| BTC Cycle | Bitcoin / On-chain | ✅ Live (Iteration 1) |
 
 ---
 
@@ -197,21 +277,51 @@ Tools that depend on external API data follow this pattern to respect free-tier 
 - **Plain-language interpretation**: every metric reading paired with a sentence explaining what it means
 - **No charts in v1**: numbers + text only, optimized for mobile and 5-second comprehension
 
-### Iteration plan
-Built incrementally, 2 metrics per iteration. Each iteration paired with conceptual learning before implementation.
+### Tool name
+The user-facing name is **Bitcoin Cycle** — not "BTC Cycle" or "BTC CYCLE". Repo name (`btc-cycle`) and URL paths remain unchanged.
 
-| Iteration | Metrics | Learning focus | Status |
+### Data freshness model
+- **BTC spot price**: fetched live from CoinGecko on every page load (`/simple/price` endpoint, no key required). Falls back to static `data/btc-price.json` if the call fails.
+- **On-chain metrics** (Realized Price, MVRV Z-Score, and all future iterations): static JSON files updated daily via GitHub Action at 00:30 UTC.
+- **Premium/discount and zone**: recalculated on every page load using the live spot price — always reflects current market position.
+- **Freshness line**: "On-chain data updated daily · Last update: [date] · BTC price: live"
+
+### Tooltip architecture
+Every key data point has a contextual tooltip (hover on desktop, tap on mobile). Implementation rules:
+- **Single instance**: one tooltip DOM element, never stacked
+- **Closes on**: mouse leave, outside click, scroll, window resize
+- **Mobile**: tap opens, tap outside closes
+- **Visual signal**: dotted underline (`border-bottom: 1px dotted`) on all tooltip-enabled elements
+- **Metric titles**: also function as external links to reference charts (open in new tab)
+- All tooltip text lives in **`tooltips.js`** — a single structured object with language-agnostic keys. Swapping this object is the only change needed for PT translation.
+
+### Zone color system
+Five zones, semantic green → red gradient:
+
+| Zone | Color | Hex | Meaning |
 |---|---|---|---|
-| 1 | Realized Price, MVRV Z-Score | UTXO, Realized Cap, Cohorts | 🚧 In progress |
-| 2 | LTH Supply, Exchange Net Position Change | HODL Waves, Coin Days Destroyed | 🔲 Planned |
-| 3 | Puell Multiple, Accumulation Trend Score | Miner economics, entity clustering | 🔲 Planned |
-| 4 | SOPR, NUPL | Profit/loss behavior, signal vs noise | 🔲 Planned |
-| 5 | Aggregate cycle reading | Synthesis across all 6 metric families | 🔲 Planned |
+| Deep Accumulation | Green | `#1a9e5c` | Strong buy signal historically |
+| Accumulation | Blue | `#2a6db5` | Favorable entry zone |
+| Fair Value | Neutral grey | `#4a4a4a` | No extreme signal |
+| Caution | Amber | `#b07d2a` | Market running hot |
+| Distribution | Red | `#9e2a2a` | Historical cycle top zone |
+
+Note: Accumulation zone uses **blue** (not green) to differentiate from Deep Accumulation. MVRV Z-Score has 4 zones only (no Accumulation zone) — each metric has its own glossary object in `tooltips.js`.
+
+### Iteration plan
+| Iteration | Metrics | Status |
+|---|---|---|
+| 1 | Realized Price, MVRV Z-Score | ✅ Live |
+| 2 | LTH Position Change 30d, Exchange Net Position Change | 🔲 Planned |
+| 3 | Puell Multiple, Accumulation Trend Score | 🔲 Planned |
+| 4 | SOPR, NUPL | 🔲 Planned |
+| 5 | Aggregate cycle reading | 🔲 Planned |
+
+Note: Iteration 2 uses **LTH Position Change 30d** instead of LTH Supply total. LTH Supply total is not available on BGeometrics free tier. LTH Position Change 30d is more actionable — it shows current accumulation/distribution direction. See `GLOSSARY.md` for full rationale.
 
 ### Companion documents (in `btc-cycle` repo)
-- `GLOSSARY.md` — on-chain terminology written by RodSan, grows with each iteration
+- `GLOSSARY.md` — on-chain terminology, grows with each iteration
 - `BITCOIN_THESIS.md` — personal decision framework, completed in Iteration 5
-- `LEARNING_LOG.md` — progress notes per iteration (optional)
 
 ---
 
@@ -227,7 +337,7 @@ Built incrementally, 2 metrics per iteration. Each iteration paired with concept
 ### Language routing
 - Primary route (`/`) → English
 - Alternate route (`/pt/`) → Portuguese BR
-- Language switching via flag/link in the header
+- Language switching via flag emoji in the header (🇧🇷)
 
 ---
 
@@ -257,6 +367,20 @@ Built incrementally, 2 metrics per iteration. Each iteration paired with concept
 | 2026-05 | Data-driven tools follow GitHub Actions → JSON static pattern | Respects free-tier rate limits, preserves no-backend philosophy, keeps API keys secret |
 | 2026-05 | `btc-cycle` built in 5 iterations, 2 metrics per iteration | Allows owner to internalize each metric before adding the next; avoids shallow understanding |
 | 2026-05 | Tool framing: cycle zones with indicative price ranges, not specific price targets | Honest about what on-chain can and cannot predict; avoids false precision |
+| 2026-05 | Subsection nav standard: brand link once (left), Blackbox + Contact in list only | Prevents duplicate nav items; established after fixing btc-cycle header |
+| 2026-05 | Language switcher uses flag emoji (🇧🇷), not plain text "PT" | Consistent with visual language of the main site; more intuitive |
+| 2026-05 | Footer in subsections and tools: X only, no LinkedIn | Cleaner; LinkedIn kept only on main site; X is primary social for the project |
+| 2026-05 | Every repo showing 🇧🇷 flag must have `/pt/index.html` (placeholder accepted) | Flag linking to 404 is unacceptable; placeholder ships before or with EN page |
+| 2026-05 | Git global email set to GitHub noreply (`42328107+0xrodsan@users.noreply.github.com`) | Personal email marked as Private on GitHub — commits with personal email do not appear on contribution graph |
+| 2026-05 | `.claude/settings.json` with `includeCoAuthoredBy: false` required in every repo | Prevents Claude Code from adding Co-Authored-By tag to commit messages |
+| 2026-05 | `.gitignore` must use `.claude/*` + `!.claude/settings.json`, never `.claude/` alone | `.claude/` silently blocks settings.json even with negation rules |
+| 2026-05 | All existing repos audited and updated: `.claude/settings.json` and `/pt/index.html` added where missing | Retroactive application of project standards to `blackbox`, `panorama-dollar`, `0xrodsan.github.io` |
+| 2026-05 | `btc-cycle` tooltip system: single-instance, dotted underline trigger, closes on outside click/scroll | Prevents tooltip stacking; mobile-safe tap behavior |
+| 2026-05 | All tooltip text centralized in `tooltips.js` with language-agnostic keys | Single file to swap for PT translation; zero logic duplication |
+| 2026-05 | Zone color system: Deep Accumulation=green, Accumulation=blue, Fair Value=grey, Caution=amber, Distribution=red | Blue differentiates Accumulation from Deep Accumulation; semantic gradient aids instant comprehension |
+| 2026-05 | BTC spot price fetched live from CoinGecko on page load; on-chain metrics remain static daily | Spot price changes intraday and affects zone calculation; on-chain metrics are daily by nature |
+| 2026-05 | Tool user-facing name is "Bitcoin Cycle" — not "BTC Cycle" or "BTC CYCLE" | Cleaner, more readable; repo name and URLs unchanged |
+| 2026-05 | Iteration 2 uses LTH Position Change 30d instead of LTH Supply total | LTH Supply total unavailable on BGeometrics free tier; Position Change is more actionable for current cycle reading |
 
 ---
 
@@ -264,7 +388,8 @@ Built incrementally, 2 metrics per iteration. Each iteration paired with concept
 
 - [ ] Define future navigation tabs beyond Blackbox
 - [ ] Acquire custom domain when moving to Path B
-- [ ] Decide whether to backfill historical data on `btc-cycle` first commit, or accumulate forward only
+- [ ] Decide whether to backfill historical data on `btc-cycle`, or accumulate forward only
+- [ ] Apply footer X-only standard retroactively to Panorama Dollar and Blackbox index
 
 ---
 
@@ -275,6 +400,7 @@ Built incrementally, 2 metrics per iteration. Each iteration paired with concept
 | Live site | https://0xrodsan.github.io/ |
 | Blackbox | https://0xrodsan.github.io/blackbox/ |
 | Panorama Dollar | https://0xrodsan.github.io/panorama-dollar/ |
+| BTC Cycle | https://0xrodsan.github.io/btc-cycle/ |
 | GitHub Profile | https://github.com/0xrodsan |
 | Design reference | https://caioleta.com/ |
 | Apps reference | https://letabuild.com/ |
