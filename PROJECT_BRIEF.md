@@ -339,12 +339,16 @@ Exchange Reserve 30d change thresholds:
 | Iteration | Metrics | Status |
 |---|---|---|
 | 1 | Realized Price, MVRV Z-Score | ✅ Live |
-| 2 | LTH Net Position Change 30d, Exchange Reserve | ✅ Live |
+| 2 | LTH Net Position Change 30d, Supply in Cold Storage | ✅ Live |
 | 3 | Puell Multiple, Accumulation Trend Score | 🔲 Planned |
 | 4 | SOPR, NUPL | 🔲 Planned |
 | 5 | Aggregate cycle reading | 🔲 Planned |
 
-Note: Iteration 2 uses **LTH Net Position Change 30d** (endpoint: `lth-net-position-change-30d-btc`) and **Exchange Reserve** (endpoint: `exchange-reserve-btc`). LTH Supply total is not available on BGeometrics free tier — Position Change is more actionable. Exchange Netflow requires a paid plan — Exchange Reserve achieves the same signal via 30d % change calculation. External reference charts: LTH → chartinspect.com/charts/lth-net-position · Exchange Reserve → cryptoquant.com/asset/btc/chart/exchange-flows/exchange-reserve
+Note: Iteration 2 metrics and endpoints (all confirmed on BGeometrics free tier):
+- **LTH Net Position Change 30d** → endpoint: `lth-net-position-change-30d-btc` · reference: chartinspect.com/charts/lth-net-position
+- **Supply in Cold Storage** (Illiquid Supply) → endpoint: `illiquid-supply` · reference: bitcoinmagazinepro.com/charts/long-term-holder-supply/
+
+Exchange Netflow (`exchange-netflow-btc`) and Exchange Reserve (`exchange-reserve-btc`) both require a paid BGeometrics plan. Illiquid Supply is a valid proxy — coins in illiquid entities correlate strongly with coins out of exchanges. User-facing name is 'Supply in Cold Storage' for clarity.
 
 ### Companion documents (in `btc-cycle` repo)
 - `GLOSSARY.md` — on-chain terminology, grows with each iteration
@@ -414,6 +418,11 @@ Note: Iteration 2 uses **LTH Net Position Change 30d** (endpoint: `lth-net-posit
 | 2026-06 | MVRV Z-Score expanded from 4 to 5 zones after threshold calibration against historical data | Original threshold of z < 0.1 for Deep Accumulation was too conservative; z=0.66 was showing as Fair Value when historically it is an accumulation zone |
 | 2026-06 | Number formatting uses toLocaleString('en-US') explicitly | Prevents pt-BR locale from rendering periods as thousands separators (e.g. +272.142 instead of +272,142) |
 | 2026-06 | External chart links use chartinspect.com for LTH and cryptoquant.com for Exchange Reserve | BGeometrics chart URLs were broken or pointed to wrong metrics; these sources have the exact charts needed |
+| 2026-06 | Iteration 2 shipped: LTH Net Position Change 30d + Supply in Cold Storage | Completes smart-money cohort view alongside Realized Price and MVRV |
+| 2026-06 | Exchange Netflow and Exchange Reserve require paid BGeometrics plan — replaced with Illiquid Supply (`illiquid-supply` endpoint) | Same directional signal; illiquid supply strongly correlates with coins leaving exchanges |
+| 2026-06 | User-facing name "Supply in Cold Storage" chosen over "Illiquid Supply" | More intuitive for non-technical users; accurately describes the behavior being measured |
+| 2026-06 | Reference chart for Supply in Cold Storage: bitcoinmagazinepro.com/charts/long-term-holder-supply/ | LTH Supply is the closest free public proxy to Illiquid Supply; Glassnode requires paid plan |
+| 2026-06 | All 4 metric blocks use identical HTML structure (div.metric-block.reveal + aria-labelledby) | Ensures consistent rendering and animation across all metrics |
 
 ---
 
@@ -440,4 +449,4 @@ Note: Iteration 2 uses **LTH Net Position Change 30d** (endpoint: `lth-net-posit
 | BGeometrics API docs | https://bitcoin-data.com/api/scalar.html |
 | BGeometrics portal | https://portal.bgeometrics.com/ |
 | ChartInspect — LTH Net Position Change | https://chartinspect.com/charts/lth-net-position |
-| CryptoQuant — Exchange Reserve | https://cryptoquant.com/asset/btc/chart/exchange-flows/exchange-reserve |
+| Bitcoin Magazine Pro — LTH Supply (Cold Storage proxy) | https://www.bitcoinmagazinepro.com/charts/long-term-holder-supply/ |
