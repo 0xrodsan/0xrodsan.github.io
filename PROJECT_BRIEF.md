@@ -263,7 +263,7 @@ Tools that depend on external API data follow this pattern to respect free-tier 
 | App | Section | Status |
 |---|---|---|
 | Panorama Dollar | Market Analysis | ✅ Live |
-| BTC Cycle | Bitcoin / On-chain | ✅ Live (Iteration 1) |
+| BTC Cycle | Bitcoin / On-chain | ✅ Live (Iteration 2) |
 
 ---
 
@@ -312,18 +312,39 @@ Five zones, semantic green → red gradient:
 | Caution | Amber | `#b07d2a` | Market running hot |
 | Distribution | Red | `#9e2a2a` | Historical cycle top zone |
 
-Note: Accumulation zone uses **blue** (not green) to differentiate from Deep Accumulation. MVRV Z-Score has 4 zones only (no Accumulation zone) — each metric has its own glossary object in `tooltips.js`.
+Note: Accumulation zone uses **blue** (not green) to differentiate from Deep Accumulation. MVRV Z-Score originally had 4 zones but was expanded to 5 (matching Realized Price) after calibration against historical data. Each metric has its own glossary object in `tooltips.js` with metric-specific thresholds and descriptions.
+
+MVRV Z-Score thresholds (calibrated 2026-06):
+- Deep Accumulation: Z < 0.5
+- Accumulation: 0.5 ≤ Z < 1.5
+- Fair Value: 1.5 ≤ Z < 3.0
+- Caution: 3.0 ≤ Z < 6.0
+- Distribution: Z ≥ 6.0
+
+LTH Net Position Change 30d thresholds:
+- Strong Accumulation: > +300,000 BTC
+- Accumulation: +50,000 to +300,000 BTC
+- Neutral: -50,000 to +50,000 BTC
+- Distribution: -300,000 to -50,000 BTC
+- Strong Distribution: < -300,000 BTC
+
+Exchange Reserve 30d change thresholds:
+- Strong Outflow: < -2%
+- Outflow: -2% to -0.5%
+- Neutral: -0.5% to +0.5%
+- Inflow: +0.5% to +2%
+- Strong Inflow: > +2%
 
 ### Iteration plan
 | Iteration | Metrics | Status |
 |---|---|---|
 | 1 | Realized Price, MVRV Z-Score | ✅ Live |
-| 2 | LTH Position Change 30d, Exchange Net Position Change | 🔲 Planned |
+| 2 | LTH Net Position Change 30d, Exchange Reserve | ✅ Live |
 | 3 | Puell Multiple, Accumulation Trend Score | 🔲 Planned |
 | 4 | SOPR, NUPL | 🔲 Planned |
 | 5 | Aggregate cycle reading | 🔲 Planned |
 
-Note: Iteration 2 uses **LTH Position Change 30d** instead of LTH Supply total. LTH Supply total is not available on BGeometrics free tier. LTH Position Change 30d is more actionable — it shows current accumulation/distribution direction. See `GLOSSARY.md` for full rationale.
+Note: Iteration 2 uses **LTH Net Position Change 30d** (endpoint: `lth-net-position-change-30d-btc`) and **Exchange Reserve** (endpoint: `exchange-reserve-btc`). LTH Supply total is not available on BGeometrics free tier — Position Change is more actionable. Exchange Netflow requires a paid plan — Exchange Reserve achieves the same signal via 30d % change calculation. External reference charts: LTH → chartinspect.com/charts/lth-net-position · Exchange Reserve → cryptoquant.com/asset/btc/chart/exchange-flows/exchange-reserve
 
 ### Companion documents (in `btc-cycle` repo)
 - `GLOSSARY.md` — on-chain terminology, grows with each iteration
@@ -388,6 +409,11 @@ Note: Iteration 2 uses **LTH Position Change 30d** instead of LTH Supply total. 
 | 2026-05 | Tool user-facing name is "Bitcoin Cycle" — not "BTC Cycle" or "BTC CYCLE" | Cleaner, more readable; repo name and URLs unchanged |
 | 2026-05 | Iteration 2 uses LTH Position Change 30d instead of LTH Supply total | LTH Supply total unavailable on BGeometrics free tier; Position Change is more actionable for current cycle reading |
 | 2026-05 | X icon uses inline SVG (official path), not the 𝕏 glyph (U+1D54F) | Glyph rendering is inconsistent across browsers/OS; SVG matches the main site exactly and is accessible via aria-label |
+| 2026-06 | Iteration 2 shipped: LTH Net Position Change 30d + Exchange Reserve | Completes smart-money cohort signal alongside Realized Price and MVRV |
+| 2026-06 | Exchange Netflow endpoint requires paid BGeometrics plan — replaced with Exchange Reserve + 30d % change | Same directional signal, available on free tier; 30d change calculated client-side from historical array |
+| 2026-06 | MVRV Z-Score expanded from 4 to 5 zones after threshold calibration against historical data | Original threshold of z < 0.1 for Deep Accumulation was too conservative; z=0.66 was showing as Fair Value when historically it is an accumulation zone |
+| 2026-06 | Number formatting uses toLocaleString('en-US') explicitly | Prevents pt-BR locale from rendering periods as thousands separators (e.g. +272.142 instead of +272,142) |
+| 2026-06 | External chart links use chartinspect.com for LTH and cryptoquant.com for Exchange Reserve | BGeometrics chart URLs were broken or pointed to wrong metrics; these sources have the exact charts needed |
 
 ---
 
@@ -413,3 +439,5 @@ Note: Iteration 2 uses **LTH Position Change 30d** instead of LTH Supply total. 
 | GitHub Pages docs | https://docs.github.com/pages |
 | BGeometrics API docs | https://bitcoin-data.com/api/scalar.html |
 | BGeometrics portal | https://portal.bgeometrics.com/ |
+| ChartInspect — LTH Net Position Change | https://chartinspect.com/charts/lth-net-position |
+| CryptoQuant — Exchange Reserve | https://cryptoquant.com/asset/btc/chart/exchange-flows/exchange-reserve |
