@@ -231,6 +231,9 @@ Tools that depend on external API data follow this pattern to respect free-tier 
 - Data freshness limited to cron frequency (acceptable for on-chain metrics, which update daily)
 - Git history grows over time (mitigated by data file rotation if needed later)
 
+### Cloudflare Worker (btc-cycle-proxy)
+A Cloudflare Worker was deployed at `https://btc-cycle-proxy.0xrodsan.workers.dev` as a proxy for the Anthropic API. It validates the request origin (only allows `0xrodsan.github.io`) and adds the API key server-side. The AI analysis feature was built but deferred — requires paid Anthropic API credits. The Worker remains deployed for future use.
+
 ---
 
 ## Section: Blackbox
@@ -263,7 +266,7 @@ Tools that depend on external API data follow this pattern to respect free-tier 
 | App | Section | Status |
 |---|---|---|
 | Panorama Dollar | Market Analysis | ✅ Live |
-| BTC Cycle | Bitcoin / On-chain | ✅ Live (Iteration 2) |
+| BTC Cycle | Bitcoin / On-chain | ✅ Live (Iteration 3) |
 
 ---
 
@@ -282,6 +285,15 @@ Tools that depend on external API data follow this pattern to respect free-tier 
 - **Indicative price ranges allowed**: derived from historical cycle behavior, presented as ranges, not commitments
 - **Plain-language interpretation**: every metric reading paired with a sentence explaining what it means
 - **No charts in v1**: numbers + text only, optimized for mobile and 5-second comprehension
+
+### UX features (implemented)
+- **Cycle Score**: aggregate reading of all 6 metrics — labeled badge + 5-segment colored bar + 6-icon summary row (one dot per metric, color = zone)
+- **Simple / Detailed toggle**: hides numeric values in Simple mode, shows only zone + interpretation. Allows non-technical users to focus on signal, not numbers.
+- **"How to read this" accordion**: collapsible guide explaining zones, colors, and all 6 metrics in plain language. Appears between Cycle Score and first metric block.
+- **Direction indicators**: ↑/↓ arrows + green/red color on change values (LTH, Cold Storage, Whale Balance)
+- **Historical context in tooltips**: extreme zones (Strong Accumulation, Distribution) reference verified historical cycle dates and prices (2015, 2018, 2022)
+- **Disclaimer**: footer line — "On-chain data is descriptive, not predictive. Past patterns do not guarantee future results."
+- **Data freshness line**: "On-chain data updated daily · Last update: [date] · BTC price: live"
 
 ### Tool name
 The user-facing name is **Bitcoin Cycle** — not "BTC Cycle" or "BTC CYCLE". Repo name (`btc-cycle`) and URL paths remain unchanged.
@@ -340,7 +352,7 @@ Exchange Reserve 30d change thresholds:
 |---|---|---|
 | 1 | Realized Price, MVRV Z-Score | ✅ Live |
 | 2 | LTH Net Position Change 30d, Supply in Cold Storage | ✅ Live |
-| 3 | Puell Multiple, Accumulation Trend Score | 🔲 Planned |
+| 3 | Puell Multiple, Whale Balance (>10k BTC) | ✅ Live |
 | 4 | SOPR, NUPL | 🔲 Planned |
 | 5 | Aggregate cycle reading | 🔲 Planned |
 
@@ -349,6 +361,8 @@ Note: Iteration 2 metrics and endpoints (all confirmed on BGeometrics free tier)
 - **Supply in Cold Storage** (Illiquid Supply) → endpoint: `illiquid-supply` · reference: bitcoinmagazinepro.com/charts/long-term-holder-supply/
 
 Exchange Netflow (`exchange-netflow-btc`) and Exchange Reserve (`exchange-reserve-btc`) both require a paid BGeometrics plan. Illiquid Supply is a valid proxy — coins in illiquid entities correlate strongly with coins out of exchanges. User-facing name is 'Supply in Cold Storage' for clarity.
+
+Note: Iteration 3 uses **Puell Multiple** (endpoint: `puell-multiple`) and **Whale Balance >10k BTC** (endpoint: `balance-addr-10K-BTC`). Accumulation Trend Score endpoint (`accumulation-trend-score`) returns HTTP 500 on BGeometrics free tier — persistent server error, not a plan limitation. Whale Balance uses 30d change (not 1d) for a more meaningful signal. Data files use append strategy to preserve history needed for 30d calculations.
 
 ### Companion documents (in `btc-cycle` repo)
 - `GLOSSARY.md` — on-chain terminology, grows with each iteration
@@ -423,6 +437,16 @@ Exchange Netflow (`exchange-netflow-btc`) and Exchange Reserve (`exchange-reserv
 | 2026-06 | User-facing name "Supply in Cold Storage" chosen over "Illiquid Supply" | More intuitive for non-technical users; accurately describes the behavior being measured |
 | 2026-06 | Reference chart for Supply in Cold Storage: bitcoinmagazinepro.com/charts/long-term-holder-supply/ | LTH Supply is the closest free public proxy to Illiquid Supply; Glassnode requires paid plan |
 | 2026-06 | All 4 metric blocks use identical HTML structure (div.metric-block.reveal + aria-labelledby) | Ensures consistent rendering and animation across all metrics |
+| 2026-06 | Iteration 3 shipped: Puell Multiple + Whale Balance (>10k BTC) | Miner economics + whale cohort complete the smart-money signal set alongside valuation and holder behavior |
+| 2026-06 | Accumulation Trend Score replaced by Whale Balance — endpoint returns HTTP 500 | Persistent server error on BGeometrics free tier; Whale Balance is a direct proxy for institutional accumulation behavior |
+| 2026-06 | Whale Balance uses 30d change (not 1d) and append strategy in GitHub Action | 1d change is too noisy; 30d trend more meaningful for cycle analysis; append preserves history needed for calculation |
+| 2026-06 | Puell Multiple zone threshold recalibrated: Pressure zone expanded to z < 1.0 | Original threshold of 0.8 was too conservative — values between 0.8 and 1.0 still represent miners below average revenue |
+| 2026-06 | All zone labels standardized to "Strong Accumulation" (removed "Deep Accumulation") | Consistency across all 6 metrics; simpler mental model for users |
+| 2026-06 | Cycle Score implemented: aggregate badge + 5-segment bar + 6-icon summary row | Single-glance reading of all 6 signals; icons use zone colors for instant visual parsing |
+| 2026-06 | Simple/Detailed toggle added | Non-technical users can hide numbers and focus on zone signals and interpretations |
+| 2026-06 | "How to read this" accordion added between Cycle Score and metrics | Onboards new users without cluttering the default view |
+| 2026-06 | AI analysis feature built (Cloudflare Worker proxy) but deferred — requires paid Anthropic API credits | Feature-complete but inactive; Worker deployed at btc-cycle-proxy.0xrodsan.workers.dev |
+| 2026-06 | Historical context added to extreme zone tooltips — verified dates/prices from 2015, 2018, 2022 cycles | Anchors abstract zones to concrete history; increases credibility and educational value |
 
 ---
 
@@ -431,6 +455,8 @@ Exchange Netflow (`exchange-netflow-btc`) and Exchange Reserve (`exchange-reserv
 - [ ] Define future navigation tabs beyond Blackbox
 - [ ] Acquire custom domain when moving to Path B
 - [ ] Decide whether to backfill historical data on `btc-cycle`, or accumulate forward only
+- [ ] Activate AI analysis feature when Anthropic API credits are added (Worker already deployed)
+- [ ] PT-BR translation of btc-cycle (tooltips.js keys already prepared for translation)
 
 ---
 
