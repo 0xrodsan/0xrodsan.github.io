@@ -351,10 +351,10 @@ Exchange Reserve 30d change thresholds:
 | Iteration | Metrics | Status |
 |---|---|---|
 | 1 | Realized Price, MVRV Z-Score | ✅ Live |
-| 2 | LTH Net Position Change 30d, Supply in Cold Storage | ✅ Live |
-| 3 | Puell Multiple, Whale Balance (>10k BTC) | ✅ Live |
-| 4 | SOPR, NUPL | 🔲 Planned |
-| 5 | Aggregate cycle reading | 🔲 Planned |
+| 2 | LTH Net Position Change, Supply in Cold Storage | ✅ Live |
+| 3 | Puell Multiple, Whale Balance | ✅ Live |
+| 4 | SOPR, NUPL | ✅ Live |
+| 5 | Aggregate cycle reading (Cycle Reading bar) | ✅ Live |
 
 Note: Iteration 2 metrics and endpoints (all confirmed on BGeometrics free tier):
 - **LTH Net Position Change 30d** → endpoint: `lth-net-position-change-30d-btc` · reference: chartinspect.com/charts/lth-net-position
@@ -447,6 +447,9 @@ Note: Iteration 3 uses **Puell Multiple** (endpoint: `puell-multiple`) and **Wha
 | 2026-06 | "How to read this" accordion added between Cycle Score and metrics | Onboards new users without cluttering the default view |
 | 2026-06 | AI analysis feature built (Cloudflare Worker proxy) but deferred — requires paid Anthropic API credits | Feature-complete but inactive; Worker deployed at btc-cycle-proxy.0xrodsan.workers.dev |
 | 2026-06 | Historical context added to extreme zone tooltips — verified dates/prices from 2015, 2018, 2022 cycles | Anchors abstract zones to concrete history; increases credibility and educational value |
+| 2026-07 | btc-cycle PT-BR built via shared i18n.js dictionary, not duplicated JS files | Single logic source, two languages; zone identity uses stable keys instead of English text |
+| 2026-07 | i18n security standard: language detected only from html lang attribute, strings injected via textContent, static dictionary with en fallback | Prevents XSS vectors and undefined renders; pattern for all future bilingual tools |
+| 2026-07 | "Whales" translated as "Baleias" in PT-BR content | Consagrated term in BR crypto community; literal English kept only in code identifiers |
 
 ---
 
